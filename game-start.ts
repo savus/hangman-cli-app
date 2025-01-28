@@ -1,10 +1,10 @@
-import { displayPlayerInfo } from "./menu-functions";
-import { compareWithAnswer } from "./validations";
+import { playTurn } from "./turns-functions";
 
+export const readlineSync = require("readline-sync");
 const answers: string[] = ["Doubtfire", "Mishap", "Fire", "Vacation"];
 
-export let currentAnswer =
-  answers[Math.floor(Math.random() * answers.length - 1) + 1];
+export let currentAnswer = answers[0];
+// answers[Math.floor(Math.random() * answers.length - 1) + 1];
 
 export let guessesMade: string[] = [];
 
@@ -12,11 +12,17 @@ export let guessesLeft = 5;
 
 export let debugMode = true;
 
-const setCurrentAnswer = (input: string) => (currentAnswer = input);
+export let turnsLeft = 5;
 
-const setGuessesMade = (input: string) => guessesMade.push(input);
+export const setCurrentAnswer = (input: string) => (currentAnswer = input);
 
-const setDebugMode = (mode: boolean) => (debugMode = mode);
+export const setGuessesMade = (input: string) => guessesMade.push(input);
+
+export const setGuessesLeft = (input: number) => (guessesLeft = input);
+
+export const setDebugMode = (mode: boolean) => (debugMode = mode);
+
+export const setTurnsLeft = (input: number) => (turnsLeft = input);
 
 const resetValues = () => {
   const randomAnswer =
@@ -25,10 +31,5 @@ const resetValues = () => {
   guessesMade.length = 0;
 };
 
-const readlineSync = require("readline-sync");
-
-displayPlayerInfo();
-
-let userInput = readlineSync.question("Please enter a guess");
-
-console.log(compareWithAnswer(userInput));
+console.clear();
+playTurn();

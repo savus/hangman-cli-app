@@ -8,8 +8,11 @@ import {
 const displayHeader = () => console.log("\n", "=".repeat(25), "\n");
 
 const displayScore = () => {
-  console.log(`Guesses made: [${guessesMade}]`);
-  console.log(`Guesses Left: ${guessesLeft}\n`);
+  console.log(
+    `Guesses made: [${guessesMade}]`,
+    "-".repeat(10),
+    `Guesses Left: ${guessesLeft}`
+  );
 };
 
 const displayProgress = () =>
@@ -20,7 +23,6 @@ const displayProgress = () =>
     );
 
 export const displayPlayerInfo = () => {
-  console.clear();
   displayHeader();
   displayScore();
   console.log(displayProgress());
