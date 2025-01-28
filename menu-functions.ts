@@ -1,4 +1,9 @@
-import { correctChoices, guessesLeft, guessesMade } from "./game-start";
+import {
+  currentAnswer,
+  debugMode,
+  guessesLeft,
+  guessesMade,
+} from "./game-start";
 
 const displayHeader = () => console.log("\n", "=".repeat(25), "\n");
 
@@ -8,12 +13,16 @@ const displayScore = () => {
 };
 
 const displayProgress = () =>
-  correctChoices.map((letter) => (guessesMade.includes(letter) ? letter : "_"));
+  currentAnswer
+    .split("")
+    .map((letter) =>
+      guessesMade.includes(letter) || debugMode === true ? letter : "_"
+    );
 
 export const displayPlayerInfo = () => {
   console.clear();
   displayHeader();
   displayScore();
-  console.log("\t".repeat(10), displayProgress());
+  console.log(displayProgress());
   displayHeader();
 };
