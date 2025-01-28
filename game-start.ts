@@ -1,19 +1,31 @@
-const answers: string[] = ["Doubtfire"];
+import { displayPlayerInfo } from "./menu-functions";
 
-const correctChoices = answers[0].split("");
-let guessesMade: string[] = [];
-const displayMessage = () =>
-  correctChoices.map((letter) => (guessesMade.includes(letter) ? letter : "_"));
+const answers: string[] = ["Doubtfire", "Mishap", "Fire", "Vacation"];
+
+export let currentAnswer =
+  answers[Math.floor(Math.random() * answers.length - 1) + 1];
+
+export let correctChoices = currentAnswer.split("");
+
+export let guessesMade: string[] = [];
+
+export let guessesLeft = 5;
+
+const setCurrentAnswer = (input: string) => (currentAnswer = input);
+
+const setCorrectChoices = (input: string) => (correctChoices = input.split(""));
+
+const setGuessesMade = (input: string) => guessesMade.push(input);
+
+const resetValues = () => {
+  const randomAnswer =
+    answers[Math.floor(Math.random() * answers.length - 1) + 1];
+  setCurrentAnswer(randomAnswer);
+  correctChoices.length = 0;
+  setCorrectChoices(currentAnswer);
+  guessesMade.length = 0;
+};
 
 const readlineSync = require("readline-sync");
 
-console.log("Type a letter you think might be in this word");
-console.log(displayMessage());
-console.log(`Current guesses have been: [${guessesMade}]`);
-const userInput = readlineSync.question("Type your answer here\n");
-
-if (correctChoices.includes(userInput)) {
-  console.log("Correct!");
-  guessesMade.push(userInput);
-}
-console.log(displayMessage());
+displayPlayerInfo();
