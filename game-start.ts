@@ -1,4 +1,4 @@
-import { playTurn } from "./turns-functions";
+import { checkIfWon, playTurn } from "./turns-functions";
 
 export const readlineSync = require("readline-sync");
 const answers: string[] = ["Doubtfire", "Mishap", "Fire", "Vacation"];
@@ -12,8 +12,6 @@ export let guessesLeft = 5;
 
 export let debugMode = true;
 
-export let turnsLeft = 5;
-
 export const setCurrentAnswer = (input: string) => (currentAnswer = input);
 
 export const setGuessesMade = (input: string) => guessesMade.push(input);
@@ -21,8 +19,6 @@ export const setGuessesMade = (input: string) => guessesMade.push(input);
 export const setGuessesLeft = (input: number) => (guessesLeft = input);
 
 export const setDebugMode = (mode: boolean) => (debugMode = mode);
-
-export const setTurnsLeft = (input: number) => (turnsLeft = input);
 
 const resetValues = () => {
   const randomAnswer =

@@ -1,15 +1,26 @@
 import {
+  currentAnswer,
   guessesLeft,
   guessesMade,
   readlineSync,
   setGuessesLeft,
-  setTurnsLeft,
-  turnsLeft,
 } from "./game-start";
 import { displayPlayerInfo } from "./menu-functions";
 import { compareWithAnswer, isInputValid } from "./validations";
 
+export const checkIfWon = () => {
+  let correctChoices = guessesMade.filter(
+    (letter) =>
+      currentAnswer.includes(letter.toLowerCase()) ||
+      currentAnswer.includes(letter.toUpperCase())
+  );
+  return correctChoices.length === currentAnswer.length;
+};
+
+const checkIfLost = () => guessesLeft === 0;
+
 export const playTurn = (): boolean => {
+  console.clear();
   displayPlayerInfo();
   let userInput = readlineSync.question("Please enter a guess\n");
   if (!isInputValid(userInput)) {
@@ -18,11 +29,10 @@ export const playTurn = (): boolean => {
 
   if (compareWithAnswer(userInput)) {
     readlineSync.question("You guessed correctly!");
-    guessesMade.push(userInput);
-    setTurnsLeft(turnsLeft - 1);
+    guessesMade.push(userInput.toLowerCase());
   } else {
     setGuessesLeft(guessesLeft - 1);
-    if (guessesLeft === 0) {
+    if (checkIfLost()) {
       readlineSync.question(`Sorry, you lose!`);
       return false;
     }
@@ -31,8 +41,8 @@ export const playTurn = (): boolean => {
     );
   }
 
-  if (turnsLeft === 0) {
-    readlineSync.question("Game Ended");
+  if (checkIfWon()) {
+    readlineSync.question("You won!");
     return true;
   }
 
