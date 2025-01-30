@@ -1,10 +1,5 @@
-import {
-  currentAnswer,
-  guessesMade,
-  hangmanImages,
-  imageIndex,
-  showGuessesLeft,
-} from "./game-start";
+import { currentAnswer, debugMode, guessesMade } from "./game-start";
+import { hangmanImages, imageIndex, showGuessesLeft } from "./hangman-images";
 
 const displayHeader = () => console.log("\n", "=".repeat(25), "\n");
 
@@ -18,23 +13,23 @@ const displayScore = () => {
   );
 };
 
-export const displayProgress = (debug = false) =>
+export const displayProgress = () =>
   console.log(
     currentAnswer
       .split("")
       .map((letter) =>
         guessesMade.includes(letter) ||
         guessesMade.includes(letter.toLowerCase()) ||
-        debug === true
+        debugMode === true
           ? letter
           : "_"
       )
   );
 
-export const displayPlayerInfo = (debug = false) => {
+export const displayPlayerInfo = () => {
   displayHeader();
   displayHangmanImage();
   displayScore();
-  displayProgress(debug);
+  displayProgress();
   displayHeader();
 };
