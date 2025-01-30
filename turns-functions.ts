@@ -1,4 +1,5 @@
 import {
+  correctGuessesMade,
   currentAnswer,
   debugMode,
   guessesMade,
@@ -10,12 +11,13 @@ import { displayPlayerInfo, displayProgress } from "./menu-functions";
 import { compareWithAnswer, isInputValid } from "./validations";
 
 export const checkIfWon = () => {
-  let correctChoices = guessesMade.filter(
-    (letter) =>
-      currentAnswer.includes(letter.toLowerCase()) ||
-      currentAnswer.includes(letter.toUpperCase())
-  );
-  return correctChoices.length === currentAnswer.length;
+  return currentAnswer
+    .split("")
+    .every(
+      (letter) =>
+        correctGuessesMade.includes(letter.toLowerCase()) ||
+        correctGuessesMade.includes(letter.toLowerCase())
+    );
 };
 
 const checkIfLost = () => showGuessesLeft() === 0;
@@ -39,6 +41,7 @@ export const playTurn = (): boolean => {
     if (compareWithAnswer(userInput)) {
       readlineSync.question("You guessed correctly!");
       guessesMade.push(userInput.toLowerCase());
+      correctGuessesMade.push(userInput);
     } else {
       setImageIndex(imageIndex + 1);
       if (checkIfLost()) {

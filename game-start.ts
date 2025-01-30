@@ -8,6 +8,8 @@ export let currentAnswer =
 
 export let guessesMade: string[] = [];
 
+export const correctGuessesMade: string[] = [];
+
 export let debugMode = false;
 
 export const setCurrentAnswer = (input: string) => (currentAnswer = input);

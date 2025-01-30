@@ -1,4 +1,9 @@
-import { currentAnswer, debugMode, guessesMade } from "./game-start";
+import {
+  correctGuessesMade,
+  currentAnswer,
+  debugMode,
+  guessesMade,
+} from "./game-start";
 import { hangmanImages, imageIndex, showGuessesLeft } from "./hangman-images";
 
 const displayHeader = () => console.log("\n", "=".repeat(25), "\n");
