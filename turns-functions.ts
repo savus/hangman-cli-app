@@ -1,11 +1,12 @@
 import {
   currentAnswer,
-  guessesLeft,
   guessesMade,
+  imageIndex,
   readlineSync,
-  setGuessesLeft,
+  setImageIndex,
+  showGuessesLeft,
 } from "./game-start";
-import { displayPlayerInfo } from "./menu-functions";
+import { displayPlayerInfo, displayProgress } from "./menu-functions";
 import { compareWithAnswer, isInputValid } from "./validations";
 
 export const checkIfWon = () => {
@@ -17,33 +18,40 @@ export const checkIfWon = () => {
   return correctChoices.length === currentAnswer.length;
 };
 
-const checkIfLost = () => guessesLeft === 0;
+const checkIfLost = () => showGuessesLeft() === 0;
 
-export const playTurn = (): boolean => {
+export const playTurn = (debug = false): boolean => {
   console.clear();
-  displayPlayerInfo();
+  displayPlayerInfo(debug);
   let userInput = readlineSync.question("Please enter a guess\n");
-  if (!isInputValid(userInput)) {
-    return playTurn();
-  }
 
-  if (compareWithAnswer(userInput)) {
-    readlineSync.question("You guessed correctly!");
-    guessesMade.push(userInput.toLowerCase());
+  if (userInput === "quit") {
+    return false;
   } else {
-    setGuessesLeft(guessesLeft - 1);
-    if (checkIfLost()) {
-      readlineSync.question(`Sorry, you lose!`);
-      return false;
+    if (!isInputValid(userInput)) {
+      return playTurn();
     }
-    readlineSync.question(
-      `You guessed incorrectly! ${guessesLeft} guesses remaining`
-    );
-  }
 
-  if (checkIfWon()) {
-    readlineSync.question("You won!");
-    return true;
+    if (compareWithAnswer(userInput)) {
+      readlineSync.question("You guessed correctly!");
+      guessesMade.push(userInput.toLowerCase());
+    } else {
+      setImageIndex(imageIndex + 1);
+      if (checkIfLost()) {
+        readlineSync.question(`Nope! Sorry, you lose!`);
+        return false;
+      }
+      readlineSync.question(
+        `You guessed incorrectly! ${showGuessesLeft()} guesses remaining`
+      );
+      guessesMade.push(userInput.toLowerCase());
+    }
+
+    if (checkIfWon()) {
+      displayProgress(debug);
+      readlineSync.question("You won!");
+      return true;
+    }
   }
 
   return playTurn();

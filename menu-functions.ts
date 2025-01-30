@@ -1,30 +1,40 @@
 import {
   currentAnswer,
-  debugMode,
-  guessesLeft,
   guessesMade,
+  hangmanImages,
+  imageIndex,
+  showGuessesLeft,
 } from "./game-start";
 
 const displayHeader = () => console.log("\n", "=".repeat(25), "\n");
+
+const displayHangmanImage = () => console.log(hangmanImages[imageIndex]);
 
 const displayScore = () => {
   console.log(
     `Guesses made: [${guessesMade}]`,
     "-".repeat(10),
-    `Guesses Left: ${guessesLeft}`
+    `Guesses Left: ${showGuessesLeft()}\n`
   );
 };
 
-const displayProgress = () =>
-  currentAnswer
-    .split("")
-    .map((letter) =>
-      guessesMade.includes(letter) || debugMode === true ? letter : "_"
-    );
+export const displayProgress = (debug = false) =>
+  console.log(
+    currentAnswer
+      .split("")
+      .map((letter) =>
+        guessesMade.includes(letter) ||
+        guessesMade.includes(letter.toLowerCase()) ||
+        debug === true
+          ? letter
+          : "_"
+      )
+  );
 
-export const displayPlayerInfo = () => {
+export const displayPlayerInfo = (debug = false) => {
   displayHeader();
+  displayHangmanImage();
   displayScore();
-  console.log(displayProgress());
+  displayProgress(debug);
   displayHeader();
 };
