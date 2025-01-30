@@ -70,10 +70,10 @@ export const hangmanImages = [
 `,
 ];
 
-export let currentAnswer = answers[0];
-// answers[Math.floor(Math.random() * answers.length - 1) + 1];
+export let currentAnswer =
+  answers[Math.floor(Math.random() * answers.length - 1) + 1];
 
-export let guessesMade: string[] = ["d", "k", "f"];
+export let guessesMade: string[] = [];
 
 export let debugMode = false;
 
