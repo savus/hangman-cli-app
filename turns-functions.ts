@@ -7,7 +7,7 @@ import {
   setDebugMode,
 } from "./game-start";
 import { imageIndex, setImageIndex, showGuessesLeft } from "./hangman-images";
-import { displayPlayerInfo, displayProgress } from "./message-functions";
+import { displayAnswer, displayPlayerInfo } from "./message-functions";
 import { compareWithAnswer, isInputValid } from "./validations";
 
 export const checkIfWon = () => {
@@ -24,7 +24,7 @@ const checkIfLost = () => showGuessesLeft() === 0;
 
 export const playTurn = (): boolean => {
   console.clear();
-  displayPlayerInfo();
+  displayPlayerInfo(currentAnswer, imageIndex, false, debugMode);
   let userInput = readlineSync.question(
     "Please enter a guess, or type 'debug' to enter debug mode or 'quit' to exit\n"
   );
@@ -45,7 +45,7 @@ export const playTurn = (): boolean => {
     } else {
       setImageIndex(imageIndex + 1);
       if (checkIfLost()) {
-        displayProgress(true);
+        displayAnswer(currentAnswer, true);
         readlineSync.question(`Nope! Sorry, you lose!`);
         return false;
       }
@@ -56,7 +56,7 @@ export const playTurn = (): boolean => {
     }
 
     if (checkIfWon()) {
-      displayProgress(true);
+      displayAnswer(currentAnswer, true);
       readlineSync.question("You won!");
       return true;
     }

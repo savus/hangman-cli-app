@@ -1,4 +1,13 @@
-import { answers, askForTutorial, displayIntro } from "./message-functions";
+import {
+  answers,
+  askForTutorial,
+  displayIntro,
+  tutorialPartFive,
+  tutorialPartFour,
+  tutorialPartOne,
+  tutorialPartThree,
+  tutorialPartTwo,
+} from "./message-functions";
 import { playTurn } from "./turns-functions";
 
 export const correctGuessesMade: string[] = [];
@@ -20,6 +29,11 @@ export let debugMode = false;
 
 console.clear();
 
-// displayIntro();
-// askForTutorial();
+displayIntro();
+askForTutorial();
+tutorialPartOne();
+tutorialPartTwo();
+tutorialPartThree();
+tutorialPartFour();
+tutorialPartFive();
 playTurn();
