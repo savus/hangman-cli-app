@@ -97,11 +97,18 @@ export const askForTutorial = () => {
   return readlineSync.keyInYN(" Would you like a tutorial?");
 };
 
+export const tutorialPartOne = () => {
+  displayHeader();
+  displayHangmanImage(0);
+  displayHeader();
+};
+
 export const runTutorial = () => {};
 
 const displayHeader = () => console.log("\n", "=".repeat(25), "\n");
 
-const displayHangmanImage = () => console.log(hangmanImages[imageIndex]);
+const displayHangmanImage = (image_index: number) =>
+  console.log(hangmanImages[image_index]);
 
 const displayScore = () => {
   console.log(
@@ -111,23 +118,25 @@ const displayScore = () => {
   );
 };
 
+const displayAnswer = (answer: string, showAnswer = false) => {
+  return answer
+    .split("")
+    .map((letter) =>
+      guessesMade.includes(letter) ||
+      guessesMade.includes(letter.toLowerCase()) ||
+      debugMode === true ||
+      showAnswer
+        ? letter
+        : "_"
+    );
+};
+
 export const displayProgress = (showAnswer = false) =>
-  console.log(
-    currentAnswer
-      .split("")
-      .map((letter) =>
-        guessesMade.includes(letter) ||
-        guessesMade.includes(letter.toLowerCase()) ||
-        debugMode === true ||
-        showAnswer
-          ? letter
-          : "_"
-      )
-  );
+  console.log(displayAnswer(currentAnswer, showAnswer));
 
 export const displayPlayerInfo = () => {
   displayHeader();
-  displayHangmanImage();
+  displayHangmanImage(imageIndex);
   displayScore();
   displayProgress();
   displayHeader();

@@ -20,6 +20,6 @@ export let debugMode = false;
 
 console.clear();
 
-displayIntro();
-askForTutorial();
-// playTurn();
+// displayIntro();
+// askForTutorial();
+playTurn();
