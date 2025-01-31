@@ -29,11 +29,13 @@ export let debugMode = false;
 
 console.clear();
 
-displayIntro();
-askForTutorial();
-tutorialPartOne();
-tutorialPartTwo();
-tutorialPartThree();
-tutorialPartFour();
-tutorialPartFive();
-playTurn();
+// displayIntro();
+// askForTutorial();
+// tutorialPartOne();
+// tutorialPartTwo();
+// tutorialPartThree();
+// tutorialPartFour();
+// tutorialPartFive();
+// playTurn();
+
+console.log(answers.sort());
