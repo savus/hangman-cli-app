@@ -7,7 +7,7 @@ import {
   setDebugMode,
 } from "./game-start";
 import { imageIndex, setImageIndex, showGuessesLeft } from "./hangman-images";
-import { displayPlayerInfo, displayProgress } from "./menu-functions";
+import { displayPlayerInfo, displayProgress } from "./message-functions";
 import { compareWithAnswer, isInputValid } from "./validations";
 
 export const checkIfWon = () => {
@@ -45,6 +45,7 @@ export const playTurn = (): boolean => {
     } else {
       setImageIndex(imageIndex + 1);
       if (checkIfLost()) {
+        displayProgress(true);
         readlineSync.question(`Nope! Sorry, you lose!`);
         return false;
       }
@@ -55,7 +56,7 @@ export const playTurn = (): boolean => {
     }
 
     if (checkIfWon()) {
-      displayProgress();
+      displayProgress(true);
       readlineSync.question("You won!");
       return true;
     }
