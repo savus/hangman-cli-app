@@ -96,7 +96,7 @@ export const textColors = {
 export const displayScreen = (
   title: string = "",
   callback: () => void,
-  message: string | null = ""
+  message: string = ""
 ) => {
   console.clear();
   if (title.length > 0)
@@ -121,7 +121,7 @@ export const displayIntro = () => {
 };
 
 export const askForTutorial = () => {
-  return readlineSync.keyInYN(" Would you like a tutorial?");
+  return readlineSync.keyInYN(" Would you like a tutorial?\n");
 };
 
 export const runTutorial = () => {
