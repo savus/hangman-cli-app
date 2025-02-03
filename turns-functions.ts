@@ -45,7 +45,7 @@ export const playTurn = (): boolean => {
     } else {
       setImageIndex(imageIndex + 1);
       if (checkIfLost()) {
-        displayAnswer(currentAnswer, true);
+        displayAnswer(currentAnswer, guessesMade, true);
         readlineSync.question(`Nope! Sorry, you lose!`);
         return false;
       }
@@ -56,7 +56,7 @@ export const playTurn = (): boolean => {
     }
 
     if (checkIfWon()) {
-      displayAnswer(currentAnswer, true);
+      displayAnswer(currentAnswer, guessesMade, true);
       readlineSync.question("You won!");
       return true;
     }

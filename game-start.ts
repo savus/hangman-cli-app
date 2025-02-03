@@ -2,11 +2,7 @@ import {
   answers,
   askForTutorial,
   displayIntro,
-  tutorialPartFive,
-  tutorialPartFour,
-  tutorialPartOne,
-  tutorialPartThree,
-  tutorialPartTwo,
+  runTutorial,
 } from "./message-functions";
 import { playTurn } from "./turns-functions";
 
@@ -29,13 +25,6 @@ export let debugMode = false;
 
 console.clear();
 
-// displayIntro();
-// askForTutorial();
-// tutorialPartOne();
-// tutorialPartTwo();
-// tutorialPartThree();
-// tutorialPartFour();
-// tutorialPartFive();
-// playTurn();
-
-console.log(answers.sort());
+displayIntro();
+if (askForTutorial()) runTutorial();
+playTurn();
