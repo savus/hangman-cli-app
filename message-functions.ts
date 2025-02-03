@@ -121,7 +121,8 @@ export const displayIntro = () => {
 };
 
 export const askForTutorial = () => {
-  return readlineSync.keyInYN(" Would you like a tutorial?\n");
+  console.log("\n");
+  return readlineSync.keyInYN(" Would you like a tutorial?");
 };
 
 export const runTutorial = () => {
