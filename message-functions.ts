@@ -1,5 +1,5 @@
 import { guessesMade, readlineSync } from "./game-start";
-import { hangmanImages, imageIndex, showGuessesLeft } from "./hangman-images";
+import { hangmanImages, imageIndex } from "./hangman-images";
 import { tutorials } from "./tutorials";
 
 export const answers: string[] = [
@@ -85,7 +85,7 @@ export const answers: string[] = [
   "zebra",
 ];
 
-export const textColors = {
+const textColors = {
   red: "\x1b[31m",
   cyan: "\x1b[36m",
   green: "\x1b[32m",
@@ -174,3 +174,5 @@ export const displayPlayerInfo = (
     displayAnswer(answer, guessesMade, debug);
   });
 };
+
+export const showGuessesLeft = () => hangmanImages.length - imageIndex;

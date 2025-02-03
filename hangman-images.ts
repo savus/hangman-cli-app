@@ -65,6 +65,4 @@ export const hangmanImages = [
 `,
 ];
 
-export const showGuessesLeft = () => hangmanImages.length - imageIndex;
-
 export const setImageIndex = (input: number) => (imageIndex = input);

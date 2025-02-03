@@ -6,11 +6,15 @@ import {
   readlineSync,
   setDebugMode,
 } from "./game-start";
-import { imageIndex, setImageIndex, showGuessesLeft } from "./hangman-images";
-import { displayAnswer, displayPlayerInfo } from "./message-functions";
-import { compareWithAnswer, isInputValid } from "./validations";
+import { imageIndex, setImageIndex } from "./hangman-images";
+import {
+  displayAnswer,
+  displayPlayerInfo,
+  showGuessesLeft,
+} from "./message-functions";
+import { validations } from "./validations";
 
-export const checkIfWon = () => {
+const checkIfWon = () => {
   return currentAnswer
     .split("")
     .every(
@@ -57,11 +61,11 @@ export const playTurn = (): boolean => {
   } else if (userInput === "debug") {
     setDebugMode(!debugMode);
   } else {
-    if (!isInputValid(userInput)) {
+    if (!validations.isInputValid(userInput)) {
       return playTurn();
     }
 
-    if (compareWithAnswer(userInput)) {
+    if (validations.compareWithAnswer(userInput)) {
       guessedCorrectly(userInput);
     } else {
       setImageIndex(imageIndex + 1);
